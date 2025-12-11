@@ -455,7 +455,8 @@ export default function App() {
     extra: '',
     logo: null,
     logoSize: 150,
-    orientation: 'top'
+    orientation: 'top',
+    textColor: 'black'
   });
 
   const fileInputRef = useRef(null);
@@ -584,7 +585,8 @@ export default function App() {
         extra: '',
         logo: null,
         logoSize: 150,
-        orientation: 'top'
+        orientation: 'top',
+        textColor: 'black'
       });
     }
   };
@@ -1208,6 +1210,31 @@ export default function App() {
                       className="w-full p-2 text-sm border rounded"
                     />
                     <div>
+                      <label className="text-xs font-semibold text-slate-600 block mb-1">Text Color</label>
+                      <div className="flex gap-2">
+                        <button
+                          type="button"
+                          onClick={() => setNewBrand({ ...newBrand, textColor: 'black' })}
+                          className={`flex-1 p-2 rounded border-2 transition-all ${newBrand.textColor === 'black'
+                            ? 'border-slate-800 bg-slate-800 text-white'
+                            : 'border-slate-300 bg-white text-slate-800 hover:border-slate-400'
+                            }`}
+                        >
+                          Black
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => setNewBrand({ ...newBrand, textColor: 'white' })}
+                          className={`flex-1 p-2 rounded border-2 transition-all ${newBrand.textColor === 'white'
+                            ? 'border-slate-800 bg-slate-800 text-white'
+                            : 'border-slate-300 bg-white text-slate-800 hover:border-slate-400'
+                            }`}
+                        >
+                          White
+                        </button>
+                      </div>
+                    </div>
+                    <div>
                       <label className="text-xs font-semibold text-slate-600 block mb-1">Logo</label>
                       <input
                         type="file"
@@ -1274,6 +1301,31 @@ export default function App() {
                             className={`p-1 rounded ${activeBranding.orientation === 'right' ? 'bg-blue-100 text-blue-600 ring-2 ring-blue-500' : 'bg-slate-100 hover:bg-slate-200 text-slate-600'}`}
                             title="Text Right"
                           ><ArrowRight size={16} /></button>
+                        </div>
+                      </div>
+                      <div className="pt-2 border-t border-slate-100 mt-2">
+                        <span className="text-xs text-slate-500 block mb-2">Text Color</span>
+                        <div className="flex gap-2">
+                          <button
+                            type="button"
+                            onClick={() => handleUpdateBrandProfile(activeBranding.id, 'textColor', 'black')}
+                            className={`flex-1 p-2 rounded border-2 text-xs font-medium transition-all ${(!activeBranding.textColor || activeBranding.textColor === 'black')
+                              ? 'border-slate-800 bg-slate-800 text-white'
+                              : 'border-slate-300 bg-white text-slate-800 hover:border-slate-400'
+                              }`}
+                          >
+                            Black
+                          </button>
+                          <button
+                            type="button"
+                            onClick={() => handleUpdateBrandProfile(activeBranding.id, 'textColor', 'white')}
+                            className={`flex-1 p-2 rounded border-2 text-xs font-medium transition-all ${activeBranding.textColor === 'white'
+                              ? 'border-slate-800 bg-slate-800 text-white'
+                              : 'border-slate-300 bg-white text-slate-800 hover:border-slate-400'
+                              }`}
+                          >
+                            White
+                          </button>
                         </div>
                       </div>
                     </div>
@@ -1518,13 +1570,19 @@ export default function App() {
                     <textarea
                       value={invoice.from.name}
                       onChange={e => setInvoice(prev => ({ ...prev, from: { ...prev.from, name: e.target.value } }))}
-                      className="text-3xl font-bold text-slate-900 bg-transparent border-none placeholder-slate-300 focus:ring-0 p-0 resize-none font-heading"
-                      style={{ width: `${Math.max(5, (invoice.from.name || '').length + 1)}ch` }}
+                      className="text-3xl font-bold bg-transparent border-none placeholder-slate-300 focus:ring-0 p-0 resize-none font-heading"
+                      style={{
+                        width: `${Math.max(5, (invoice.from.name || '').length + 1)}ch`,
+                        color: activeBranding?.textColor === 'white' ? '#ffffff' : '#000000'
+                      }}
                       placeholder="Your Company Name"
                       rows={1}
                     />
                   ) : (
-                    <h1 className="text-3xl font-bold text-slate-900 font-heading">{invoice.from.name}</h1>
+                    <h1
+                      className="text-3xl font-bold font-heading"
+                      style={{ color: activeBranding?.textColor === 'white' ? '#ffffff' : '#000000' }}
+                    >{invoice.from.name}</h1>
                   )}
 
                   {!isPrintMode ? (
@@ -1532,23 +1590,37 @@ export default function App() {
                       <textarea
                         value={invoice.from.address}
                         onChange={e => setInvoice(prev => ({ ...prev, from: { ...prev.from, address: e.target.value } }))}
-                        className="mt-2 text-slate-500 bg-transparent border-none focus:ring-0 p-0 resize-none text-sm block"
-                        style={{ width: `${Math.max(10, (invoice.from.address || '').split('\n').reduce((max, line) => Math.max(max, line.length), 0) + 1)}ch` }}
+                        className="mt-2 bg-transparent border-none focus:ring-0 p-0 resize-none text-sm block"
+                        style={{
+                          width: `${Math.max(10, (invoice.from.address || '').split('\n').reduce((max, line) => Math.max(max, line.length), 0) + 1)}ch`,
+                          color: activeBranding?.textColor === 'white' ? '#ffffff' : '#000000'
+                        }}
                         placeholder="Your Address..."
                         rows={3}
                       />
                       <input
                         value={invoice.from.extra || ''}
                         onChange={e => setInvoice(prev => ({ ...prev, from: { ...prev.from, extra: e.target.value } }))}
-                        className="mt-1 text-slate-400 bg-transparent border-none focus:ring-0 p-0 text-xs block"
-                        style={{ width: `${Math.max(10, (invoice.from.extra || '').length + 1)}ch` }}
+                        className="mt-1 bg-transparent border-none focus:ring-0 p-0 text-xs block"
+                        style={{
+                          width: `${Math.max(10, (invoice.from.extra || '').length + 1)}ch`,
+                          color: activeBranding?.textColor === 'white' ? '#ffffff' : '#000000'
+                        }}
                         placeholder="Website, Email, Phone..."
                       />
                     </div>
                   ) : (
                     <div>
-                      <pre className="mt-2 text-slate-500 text-sm font-sans whitespace-pre-wrap">{invoice.from.address}</pre>
-                      {invoice.from.extra && <p className="mt-1 text-slate-400 text-xs">{invoice.from.extra}</p>}
+                      <pre
+                        className="mt-2 text-sm font-sans whitespace-pre-wrap"
+                        style={{ color: activeBranding?.textColor === 'white' ? '#ffffff' : '#000000' }}
+                      >{invoice.from.address}</pre>
+                      {invoice.from.extra && (
+                        <p
+                          className="mt-1 text-xs"
+                          style={{ color: activeBranding?.textColor === 'white' ? '#ffffff' : '#000000' }}
+                        >{invoice.from.extra}</p>
+                      )}
                     </div>
                   )}
                 </div>
