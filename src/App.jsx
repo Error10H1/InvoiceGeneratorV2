@@ -1328,6 +1328,64 @@ export default function App() {
                           </button>
                         </div>
                       </div>
+
+                      {/* Editable Profile Details */}
+                      <div className="pt-2 border-t border-slate-100 mt-2 space-y-2">
+                        <span className="text-xs text-slate-500 block mb-2 font-semibold">Profile Details</span>
+
+                        <input
+                          type="text"
+                          value={activeBranding.profileName || ''}
+                          onChange={e => handleUpdateBrandProfile(activeBranding.id, 'profileName', e.target.value)}
+                          placeholder="Profile Name"
+                          className="w-full p-2 text-xs border border-slate-200 rounded"
+                        />
+
+                        <input
+                          type="text"
+                          value={activeBranding.companyName || ''}
+                          onChange={e => handleUpdateBrandProfile(activeBranding.id, 'companyName', e.target.value)}
+                          placeholder="Company Name"
+                          className="w-full p-2 text-xs border border-slate-200 rounded"
+                        />
+
+                        <textarea
+                          value={activeBranding.address || ''}
+                          onChange={e => handleUpdateBrandProfile(activeBranding.id, 'address', e.target.value)}
+                          placeholder="Address"
+                          rows={2}
+                          className="w-full p-2 text-xs border border-slate-200 rounded"
+                        />
+
+                        <textarea
+                          value={activeBranding.extra || ''}
+                          onChange={e => handleUpdateBrandProfile(activeBranding.id, 'extra', e.target.value)}
+                          placeholder="Extra info (phone, email, etc.)"
+                          rows={2}
+                          className="w-full p-2 text-xs border border-slate-200 rounded"
+                        />
+
+                        <div>
+                          <label className="text-xs font-semibold text-slate-600 block mb-1">Update Logo</label>
+                          <input
+                            type="file"
+                            accept="image/*"
+                            onChange={e => {
+                              const file = e.target.files[0];
+                              if (file) {
+                                const reader = new FileReader();
+                                reader.onloadend = () => {
+                                  handleUpdateBrandProfile(activeBranding.id, 'logo', reader.result);
+                                };
+                                reader.readAsDataURL(file);
+                              }
+                            }}
+                            className="text-xs"
+                          />
+                        </div>
+
+                        <p className="text-[10px] text-green-600 italic mt-2">✓ Changes save automatically</p>
+                      </div>
                     </div>
                   </div>
                 )}
