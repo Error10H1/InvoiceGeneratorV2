@@ -1,0 +1,225 @@
+@import "tailwindcss";
+
+/* ===========================
+   INVOICE TEMPLATE STYLES
+   =========================== */
+
+/* ========== CLASSIC TEMPLATE ========== */
+
+/* Header with accent color bar */
+.template-classic>div:first-of-type {
+  background: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%) !important;
+  color: white !important;
+  padding: 2rem !important;
+}
+
+.template-classic>div:first-of-type h2 {
+  color: white !important;
+}
+
+.template-classic>div:first-of-type .text-slate-400,
+.template-classic>div:first-of-type .text-slate-700,
+.template-classic>div:first-of-type .text-slate-900 {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+/* Table styling */
+.template-classic table {
+  border: 1px solid #e2e8f0;
+}
+
+.template-classic table thead {
+  background: #f1f5f9;
+  border-bottom: 2px solid #e2e8f0;
+}
+
+.template-classic table thead th {
+  font-weight: 600;
+  color: #475569;
+  padding: 0.75rem;
+}
+
+.template-classic table tbody tr:hover {
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.template-classic table tbody td {
+  border-bottom: 1px solid #f1f5f9;
+  padding: 0.75rem;
+}
+
+/* Footer with accent bar */
+.template-classic>div:last-of-type {
+  border-top: 4px solid #3b82f6 !important;
+  background: linear-gradient(to right, #f8fafc, #f1f5f9) !important;
+}
+
+@media print {
+  .template-classic>div:first-of-type {
+    background: #3b82f6 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+
+/* ========== MODERN TEMPLATE ========== */
+.template-modern {
+  position: relative;
+}
+
+/* Geometric decoration */
+.template-modern::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  height: 200px;
+  background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  opacity: 0.1;
+  z-index: 0;
+  pointer-events: none;
+}
+
+/* Bold header */
+.template-modern>div:first-of-type {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%) !important;
+  color: white !important;
+  padding: 3rem 2rem !important;
+  position: relative;
+  z-index: 1;
+}
+
+.template-modern>div:first-of-type h2 {
+  color: white !important;
+  font-size: 4rem !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.025em !important;
+}
+
+.template-modern>div:first-of-type .text-slate-400,
+.template-modern>div:first-of-type .text-slate-700,
+.template-modern>div:first-of-type .text-slate-900 {
+  color: rgba(255, 255, 255, 0.95) !important;
+}
+
+/* Modern table with colored header */
+.template-modern table thead {
+  background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+  color: white;
+}
+
+.template-modern table thead th {
+  color: white !important;
+  font-weight: 700;
+  padding: 1rem 0.75rem;
+  text-transform: uppercase;
+  font-size: 0.75rem;
+  letter-spacing: 0.05em;
+}
+
+.template-modern table tbody tr:nth-child(odd) {
+  background: #faf5ff;
+}
+
+.template-modern table tbody tr:hover {
+  background: #f3e8ff;
+}
+
+.template-modern table tbody td {
+  padding: 1rem 0.75rem;
+  border: none;
+}
+
+/* Footer */
+.template-modern>div:last-of-type {
+  background: linear-gradient(to right, #faf5ff, #f3e8ff) !important;
+  border-top: 3px solid #8b5cf6 !important;
+}
+
+@media print {
+  .template-modern>div:first-of-type {
+    background: #6366f1 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+
+  .template-modern table thead {
+    background: #6366f1 !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+
+/* ========== MINIMAL TEMPLATE ========== */
+.template-minimal {
+  border: 2px solid #e2e8f0;
+  border-radius: 0.5rem;
+}
+
+/* Clean simple header */
+.template-minimal>div:first-of-type {
+  background: #ffffff !important;
+  border-bottom: 1px solid #e2e8f0 !important;
+  padding: 2rem !important;
+}
+
+.template-minimal>div:first-of-type h2 {
+  color: #0f172a !important;
+  font-weight: 300 !important;
+  font-size: 3.5rem !important;
+  letter-spacing: 0.1em !important;
+}
+
+/* Borderless table with subtle dividers */
+.template-minimal table {
+  border: none;
+}
+
+.template-minimal table thead {
+  background: transparent;
+  border-bottom: 2px solid #0f172a;
+}
+
+.template-minimal table thead th {
+  color: #0f172a;
+  font-weight: 600;
+  padding: 0.75rem 1rem;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  letter-spacing: 0.1em;
+  border: none;
+}
+
+.template-minimal table tbody tr {
+  border-bottom: 1px solid #f1f5f9;
+}
+
+.template-minimal table tbody tr:last-child {
+  border-bottom: none;
+}
+
+.template-minimal table tbody tr:hover {
+  background: #f8fafc;
+}
+
+.template-minimal table tbody td {
+  padding: 1rem;
+  border: none;
+}
+
+/* Footer */
+.template-minimal>div:last-of-type {
+  background: #fafafa !important;
+  border-top: 1px solid #e2e8f0 !important;
+  padding: 1.5rem !important;
+}
+
+@media print {
+  .template-minimal {
+    border-color: #cbd5e1;
+  }
+}
